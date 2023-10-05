@@ -57,6 +57,72 @@ split_punct <- function(x){
 }
 
 
+# step 8
+
+#T and P are the results from step 7, b is the result from step 6
+index <- sample(1:nrow(matrixT),1)
+##Y pick a random row from the matrixT
+fra_T <- data.frame(matrixT)
+fra_P <- data.frame(matrixP)
+##Y transfer the matrixT amd matrixP to data.frame
+colnames(matrixT)=NULL
+colnames(matrixP)=NULL
+##Y delete the column names
+i <- matrixT[index,1] 
+##Y i is the element in the first column of the random row 
+j <- matrixT[index,2] 
+##Y j is the element in the second column of the random row
+freq_b <- tabulate(index_vector)[orders[1:mword]]
+##Y calculate how many times that each common word appears in the "a_processed"
+rep_b <- rep(1:mword,freq_b)
+##Y express each word as a number and repeat the number of times it appears, 
+##Y so that when randomly selected in "rep-b"
+##Y the probability of each word being extracted is the frequency of the word
+kab <- c(i,j) 
+##Y set the final 50-words simulation named "kab", which contains updated i and j.
+for(iteration in 1:48){
+  ##Y at start we have two words, so repeat 48 times
+  if (length(which(fra_T$t1==i & fra_T$t2==j)>0)){
+    ##Y Firstly, pick next word from matrixT,
+    ##Y if length>0, it means that the sub-matrix has the rows which contain i and j
+    rows <- sample(which(fra_T$t1==i & fra_T$t2==j),1)
+    ##Y Extract the rows number which contains the i in column 1 and j in column 2
+    ##Y pick one row randomly by using "sample"
+    i <- j
+    ##Y update i <- j
+    j <- matrixT[rows,3] 
+    ##Y update j,which is the element in column 3 of picked row in matrixT. 
+    kab <- c(kab,j) 
+    ##Y update the “kab”
+  }
+  else{if (length(which(fra_P$p1==j))>0){ 
+    ##Y If we cannot find the corresponding rows in matrixT
+    ##Y we simulate the next word using matrixP. 
+    rows <- sample(which(fra_P$p1==j),1) 
+    ##Y extract the rows number which contains the j in column 1 
+    ##Y pick one row randomly by using "sample"
+    i <- j 
+    ##Y update i <- j
+    j <- matrixP[rows,2] 
+    ##Y update j,which is the element in column 2 of picked row in matrixP. 
+    kab <- c(kab,j) 
+    ##Y update the kab
+  }
+    else{ 
+      ##Y If we cannot find the corresponding rows in matrixP
+      ##Y we simulate the next word using the common word frequencies
+      i <- j
+      ##Y update i <- j
+      j <- sample(rep_b,1) 
+      ##Y update j,which is the element in b,selected by the common word frequencies.
+      kab <- c(kab,j) 
+      ##Y update the kab.
+    }}
+}
+
+cat <- b[kab] 
+##Y "kab" is the word index corresponding to common words, b[kab] is the final 50-words section
+
 #step10
 Capital_letter <- "A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z" #for the purpose of identifying capital letter in words
 word_capital <- grep(Capital_letter,substr(a_processed,1,1)) #identify which word has a capital letter at its beginning
