@@ -72,7 +72,7 @@ i <- matrixT[index,1]
 ##Y i is the element in the first column of the random row 
 j <- matrixT[index,2] 
 ##Y j is the element in the second column of the random row
-freq_b <- tabulate(index_vector)[orders[1:mword]]
+freq_b <- tabulate(index_vector)[sorted_index[1:mword]]
 ##Y calculate how many times that each common word appears in the "a_processed"
 rep_b <- rep(1:mword,freq_b)
 ##Y express each word as a number and repeat the number of times it appears, 
