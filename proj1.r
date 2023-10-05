@@ -55,3 +55,20 @@ split_punct=function(x){
   }
   return(string)
 }
+
+
+#step10
+Capital_letter="A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z" #for the purpose of identifying capital letter in words
+word_capital=grep(Capital_letter,substr(a_processed,1,1)) #identify which word has a capital letter at its beginning
+id_capital=rep(0,length(a_processed)) #create auxiliary variable, for further purpose of identifying which word has a capital letter at its beginning
+id_capital[word_capital]=1 # if a pisition of this vector equals to 1, then there is a capital beginning in this word
+frame=data.frame(table(matching_indices,id_capital)) 
+# create a table that summarize the frequency of each word in the most common word list
+# and these frequencies are further divided into the case of first letter being capital or not being capital
+frame=cbind(frame[1:mword,],frame[mword+1:2*mword,]) #reshape the table so that frequencies of capital and non-capital are presented in two columns
+frame=frame[c(3,6)] #only save columns of frequency
+colnames(frame)=c("non_cap","cap") #rename columns
+cap_prob=frame$cap/(frame$non_cap+frame$cap) #calculate the probability that each words in most common list have capital letter in the first position
+b_cap=which(cap_prob>=0.5) #determine the first letter of which word should be transformed to capital one
+substr(b[b_cap],1,1)=toupper(substr(b[b_cap],1,1)) #modify b so that the first letters of selected words are transformed into capital ones
+cat_after_cap=b[kab] #update generating sentence in step 8
