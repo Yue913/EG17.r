@@ -35,7 +35,7 @@ split_punct <- function(x){
     total <- length(punc) ## update variable total, which determines whether maximum iteration has been attained
     t_x[punc] <- substr(t_x[punc],1,nchar(t_x[punc])-1) ## remove the last punctuation mark (if exists) from every word
     max_iteration <- max_iteration+1 ## update variable max_iteration
-    if (total==0){break()}
+    if (total == 0){break()}
   }
   max_iteration <- max_iteration-2 ## total iterations needed to completely split punctuation marks
   
@@ -90,11 +90,11 @@ thresholdfunc <- function(x,y){
   ## meanwhile it will give the index of breaking point, which is the threshold 
   return(threshold)
 }
-threshold1<-thresholdfunc(sorted_tabulate,1000)
-mword<-match(threshold1-1, sorted_tabulate)
+threshold1 <- thresholdfunc(sorted_tabulate,1000)
+mword <- match(threshold1-1, sorted_tabulate)
 mword <- mword-1
 ## these 2 steps above is to find the place of the last occurrence of threshold number 
-b<-b1[sorted_index[1:mword]] ## b gives the 1015 most common words, which is nearly 1000
+b <- b1[sorted_index[1:mword]] ## b gives the 1015 most common words, which is nearly 1000
 
 
 # step 7
@@ -143,18 +143,15 @@ for(iteration in 1:48){
     kab <- c(kab,j) ## update the index vector "kab"
   }
   else{if (length(which(fra_P$p1==j))>0){ 
-    ## If we cannot find the corresponding rows in matrixT
-    ## we simulate the next word using matrixP. 
+    ## If we cannot find the corresponding rows in matrixT, we simulate the next word using matrixP. 
     rows <- sample(which(fra_P$p1==j),1) 
-    ## extract the rows number which contains the j in column 1 
-    ## pick one row randomly by using "sample"
+    ## extract the rows number which contains the j in column 1, pick one row randomly by using "sample"
     i <- j ## update i <- j
     j <- matrixP[rows,2] ## update j,which is the element in column 2 of picked row in matrixP. 
     kab <- c(kab,j) ## update the index vector "kab"
   }
     else{ 
-      ## If we cannot find the corresponding rows in matrixP
-      ## we simulate the next word using the common word frequencies
+      ## If we cannot find the corresponding rows in matrixP, we simulate the next word using the common word frequencies
       i <- j ## update i <- j
       j <- sample(rep_b,1) ## update j,which is the element in b,selected by the common word frequencies.
       kab <- c(kab,j) ## update the index vector "kab"
