@@ -131,7 +131,7 @@ id_capital[word_capital] <- 1 # if a pisition of this vector equals to 1, then t
 frame <- data.frame(table(matching_indices,id_capital)) 
 # create a table that summarize the frequency of each word in the most common word list
 # and these frequencies are further divided into the case of first letter being capital or not being capital
-frame <- cbind(frame[1:mword,],frame[mword+1:2*mword,]) #reshape the table so that frequencies of capital and non-capital are presented in two columns
+frame <- cbind(frame[1:mword,],frame[(mword+1):(2*mword),]) #reshape the table so that frequencies of capital and non-capital are presented in two columns
 frame <- frame[c(3,6)] #only save columns of frequency
 colnames(frame) <- c("non_cap","cap") #rename columns
 cap_prob <- frame$cap/(frame$non_cap+frame$cap) #calculate the probability that each words in most common list have capital letter in the first position
