@@ -172,6 +172,7 @@ for(iteration in 1:48){
 }
 
 cat <- b[kab] ## "kab" is the word index corresponding to common words, b[kab] gives the final 50-words section.
+print(cat)
 
 
 ## step 9
@@ -199,3 +200,4 @@ b_cap <- which(cap_prob>=0.5) ## determine the first letter of which word should
 B_cap <- b ## create auxiliary variable, in order to make a modified version of b while not affecting b
 substr(B_cap[b_cap],1,1) <- toupper(substr(B_cap[b_cap],1,1)) ## modify b so that the first letters of selected words are transformed into capital ones
 cat_after_cap <- B_cap[kab] ## update generating sentence in step 8
+print(cat_after_cap)
