@@ -4,18 +4,17 @@
 
 ## Everyone participated in the discussion, constructed the logic flow of code together. 
 
-## Linfan Shi works on code and comment in step6, step9 and set matrix T,P with comment in step7 after
-## discussing with other two members about the structure of matrices, also comment on removing unnecessary
-## punctuation marks by explaining gsub in step4 before setting split_punct function.
+## Linfan Shi worked on code and comments in step6, step7 and step9, and also respondible for removing unnecessary punctuation marks in step4 
+## before setting split_punct function.
 
-## Xinyue Huang worked with realizing the discussed idea and comments in step4 and step10.
+## Xinyue Huang worked on code and comments in remaining part of step4 and step10.
 
-## Yue Yu worked on code and comments in step 8, simulated the 50-words sections.
+## Yue Yu worked on code and comments in step8, simulated the 50-words sections.
 
 ## Each member contributes roughly equal (33%) to this project.
 
 
-setwd(" ") ## file working dictionary between the quotient marks
+setwd(" ") ## fill working dictionary between the quotient marks
 a <- scan("gutenberg.org_files_4300_4300-01.txt",what="character",skip=73,nlines=32858-73,encoding="UTF-8")
 a <- gsub("_(","",a,fixed=TRUE) ## remove "_("
 
