@@ -119,24 +119,24 @@ t3 <- matching_indices[3:(length(matching_indices))]
 ## Given that the 2nd and 3rd columns are created by shifting the matching indices by one place and two places, the length of three columns are length(matching_indices),
 ## length(matching_indices)-1, length(matching_indices)-2, respectively. To form the matrix1 we need to make the number of rows equal to length(matching_indices)-2
 matrix1 <- cbind(t1,t2,t3)
-matrixT <- matrix1[!rowSums(is.na(matrix1)), ]
+T <- matrix1[!rowSums(is.na(matrix1)), ]
 ## function "is.na" is used to detected NA in matrix1 by giving TRUE or FALSE, 
 ## "rowSums" function counts up the number of NA in each row, "!" is logical negation, which can remove rows containing NA finally. " " in the last keeps columns unchanged 
 p1 <- matching_indices[1:(length(matching_indices)-1)]
 p2 <- matching_indices[2:(length(matching_indices))]
 matrix2 <- cbind(p1,p2)
-matrixP <- matrix2[!rowSums(is.na(matrix2)), ] ## the same method applied into forming matrixP
+P <- matrix2[!rowSums(is.na(matrix2)), ] ## the same method applied into forming P
 
 
 ## step 8
 
-index <- sample(1:nrow(matrixT),1) ## pick a random row from the matrixT
-fra_T <- data.frame(matrixT)
-fra_P <- data.frame(matrixP) ## transfer the matrixT amd matrixP to data.frame
-colnames(matrixT)=NULL
-colnames(matrixP)=NULL ## delete the column names
-i <- matrixT[index,1] ## i is the element in the first column of the random row 
-j <- matrixT[index,2] ## j is the element in the second column of the random row
+index <- sample(1:nrow(T),1) ## pick a random row from the matrixT
+fra_T <- data.frame(T)
+fra_P <- data.frame(P) ## transfer the matrixT amd matrixP to data.frame
+colnames(T)=NULL
+colnames(P)=NULL ## delete the column names
+i <- T[index,1] ## i is the element in the first column of the random row 
+j <- T[index,2] ## j is the element in the second column of the random row
 freq_b <- tabulate(index_vector)[sorted_index[1:mword]] ## calculate how many times that each common word appears in the "a_processed"
 rep_b <- rep(1:mword,freq_b) 
 ## express each word as a number and repeat the number of times it appears, 
@@ -152,7 +152,7 @@ for(iteration in 1:48){
     ## Extract the rows number which contains the i in column 1 and j in column 2
     ## pick one row randomly by using "sample"
     i <- j ## update i <- j
-    j <- matrixT[rows,3] ## update j,which is the element in column 3 of picked row in matrixT. 
+    j <- T[rows,3] ## update j,which is the element in column 3 of picked row in matrixT. 
     kab <- c(kab,j) ## update the index vector "kab"
   }
   else{if (length(which(fra_P$p1==j))>0){ 
@@ -160,7 +160,7 @@ for(iteration in 1:48){
     rows <- sample(which(fra_P$p1==j),1) 
     ## extract the rows number which contains the j in column 1, pick one row randomly by using "sample"
     i <- j ## update i <- j
-    j <- matrixP[rows,2] ## update j,which is the element in column 2 of picked row in matrixP. 
+    j <- P[rows,2] ## update j,which is the element in column 2 of picked row in matrixP. 
     kab <- c(kab,j) ## update the index vector "kab"
   }
     else{ 
