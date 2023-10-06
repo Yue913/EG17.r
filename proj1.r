@@ -142,7 +142,7 @@ rep_b <- rep(1:mword,freq_b)
 ## express each word as a number and repeat the number of times it appears, 
 ## so that when randomly selected in "rep-b"
 ## the probability of each word being extracted is the frequency of the word
-kab <- c(i,j)  ## set the final 50-words simulation named "kab", which contains updated i and j.
+kab <- c(i,j)  ## set the index of final 50-words simulation named "kab", which contains updated i and j.
 for(iteration in 1:48){
   ## at start we have two words, so repeat 48 times
   if (length(which(fra_T$t1==i & fra_T$t2==j)>0)){
@@ -171,7 +171,7 @@ for(iteration in 1:48){
     }}
 }
 
-cat <- b[kab] ## "kab" is the word index corresponding to common words, b[kab] gives the final 50-words section
+cat <- b[kab] ## "kab" is the word index corresponding to common words, b[kab] gives the final 50-words section.
 
 
 ## step 9
