@@ -130,9 +130,9 @@ P <- matrix2[!rowSums(is.na(matrix2)), ] ## the same method applied into forming
 
 ## step 8
 
-index <- sample(1:nrow(T),1) ## pick a random row from the matrixT
+index <- sample(1:nrow(T),1) ## pick a random row from the matrix T
 fra_T <- data.frame(T)
-fra_P <- data.frame(P) ## transfer the matrixT amd matrixP to data.frame
+fra_P <- data.frame(P) ## transfer the matrix T amd matrix P to data.frame
 colnames(T)=NULL
 colnames(P)=NULL ## delete the column names
 i <- T[index,1] ## i is the element in the first column of the random row 
@@ -146,25 +146,25 @@ kab <- c(i,j)  ## set the final 50-words simulation named "kab", which contains 
 for(iteration in 1:48){
   ## at start we have two words, so repeat 48 times
   if (length(which(fra_T$t1==i & fra_T$t2==j)>0)){
-    ## Firstly, pick next word from matrixT,
+    ## Firstly, pick next word from matrix T,
     ## if length>0, it means that the sub-matrix has the rows which contain i and j
     rows <- sample(which(fra_T$t1==i & fra_T$t2==j),1)
     ## Extract the rows number which contains the i in column 1 and j in column 2
     ## pick one row randomly by using "sample"
     i <- j ## update i <- j
-    j <- T[rows,3] ## update j,which is the element in column 3 of picked row in matrixT. 
+    j <- T[rows,3] ## update j,which is the element in column 3 of picked row in matrix T. 
     kab <- c(kab,j) ## update the index vector "kab"
   }
   else{if (length(which(fra_P$p1==j))>0){ 
-    ## If we cannot find the corresponding rows in matrixT, we simulate the next word using matrixP. 
+    ## If we cannot find the corresponding rows in matrix T, we simulate the next word using matrix P. 
     rows <- sample(which(fra_P$p1==j),1) 
     ## extract the rows number which contains the j in column 1, pick one row randomly by using "sample"
     i <- j ## update i <- j
-    j <- P[rows,2] ## update j,which is the element in column 2 of picked row in matrixP. 
+    j <- P[rows,2] ## update j,which is the element in column 2 of picked row in matrix P. 
     kab <- c(kab,j) ## update the index vector "kab"
   }
     else{ 
-      ## If we cannot find the corresponding rows in matrixP, we simulate the next word using the common word frequencies
+      ## If we cannot find the corresponding rows in matrix P, we simulate the next word using the common word frequencies
       i <- j ## update i <- j
       j <- sample(rep_b,1) ## update j,which is the element in b,selected by the common word frequencies.
       kab <- c(kab,j) ## update the index vector "kab"
