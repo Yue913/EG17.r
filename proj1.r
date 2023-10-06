@@ -1,7 +1,21 @@
-## Members in group 17: Linfan Shi；Xinyue Huang；Yue Yu.
+## Members in group 17: Linfan Shi:s2508485; Xinyue Huang:s2504007; Yue Yu:s2496178.
+
 ## Description of contribution: 
 
-setwd("C:/Users/hp/Downloads") ## comment out of submitted
+## Everyone participated in the discussion, constructed the logic flow of code together. 
+
+## Linfan Shi works on code and comment in step6, step9 and set matrix T,P with comment in step7 after
+## discussing with other two members about the structure of matrices, also comment on removing unnecessary
+## punctuation marks by explaining gsub in step4 before setting split_punct function.
+
+## Xinyue Huang worked with realizing the discussed idea and comments in step4 and step10.
+
+## Yue Yu worked on code and comments in step 8, simulated the 50-words sections.
+
+## Each member contributes roughly equal (33%) to this project.
+
+
+setwd(" ") ## file working dictionary between the quotient marks
 a <- scan("gutenberg.org_files_4300_4300-01.txt",what="character",skip=73,nlines=32858-73,encoding="UTF-8")
 a <- gsub("_(","",a,fixed=TRUE) ## remove "_("
 
