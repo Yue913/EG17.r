@@ -13,6 +13,8 @@
 
 ## Each member contributes roughly equal (33%) to this project.
 
+##git: https://github.com/Yue913/proj1.r.git
+
 
 setwd(" ") ## fill working dictionary between the quotient marks
 a <- scan("gutenberg.org_files_4300_4300-01.txt",what="character",skip=73,nlines=32858-73,encoding="UTF-8")
