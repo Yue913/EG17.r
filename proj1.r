@@ -172,7 +172,16 @@ for(iteration in 1:48){
 }
 
 cat <- b[kab] ## "kab" is the word index corresponding to common words, b[kab] gives the final 50-words section.
-print(cat) ## shows the final 50-words section.
+## define a paste function for printing text from string vector
+paste_function=function(x){
+  paste_outcome=c()
+  for (i in 1:length(x)){
+    if (grepl(custom_pattern, x[i])==TRUE){paste_outcome=paste(paste_outcome,x[i],sep="")}else{
+      paste_outcome=paste(paste_outcome,x[i]) 
+    }
+  }
+}
+print(paste_function(cat)) ## shows the final 50-words section.
 
 
 ## step 9
@@ -180,7 +189,7 @@ print(cat) ## shows the final 50-words section.
 freq_b <- sorted_tabulate[1:mword]
 prob_b <- freq_b/sum(tabulate(index_vector))
 text_comparison <- sample(b,50,prob=prob_b) ## "sample" function independently selects 50 characters from b with probability vector specified by frequencies
-print(text_comparison) ## shows the final 50-words section for comparison.
+print(paste_function(text_comparison)) ## shows the final 50-words section (with out model) for comparison.
 
 
 ## step10
@@ -200,4 +209,4 @@ b_cap <- which(cap_prob>=0.5) ## determine the first letter of which word should
 B_cap <- b ## create auxiliary variable, in order to make a modified version of b while not affecting b
 substr(B_cap[b_cap],1,1) <- toupper(substr(B_cap[b_cap],1,1)) ## modify b so that the first letters of selected words are transformed into capital ones
 cat_after_cap <- B_cap[kab] ## update generating sentence in step 8
-print(cat_after_cap) ## shows the final 50 words section after updating.
+print(paste_function(cat_after_cap)) ## shows the final 50 words section after change capital letter.
