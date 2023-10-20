@@ -1,3 +1,7 @@
+## Members in group 17: Linfan Shi:s2508485; Xinyue Huang:s2504007; Yue Yu:s2496178.
+
+## Description of contribution: 
+
 ## Overview:
 ## This project simulates a stochastic queuing model depicting a real-life scenario where cars go through French and British stations consecutively 
 ## before approaching a French ferry terminal. 
@@ -19,7 +23,7 @@
 
 
 ## Part 1 
-## This part stimulates a second-wise model, where queue length and remaining processing time of 10 queues (5 for each station: french station and british station) 
+## This part stimulates a second-wise model, where queue length and remaining processing time of 10 queues (5 for each station: french and british station) 
 ##  are updated dynamically every second as time passes. 
 ## Definition of inputs: 
 ##        mf=number of french stations; mb=number of British stations
