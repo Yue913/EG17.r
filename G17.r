@@ -1,11 +1,9 @@
 # Members in group 17: Linfan Shi s2508485 Xinyue Huang s2504007 Yue Yu s2496178
 # Github repo address: https://github.com/Yue913/ESP17.r.git
-# Contribution:
-#
-#
-#
-
-
+# Contribution: Linfan was primarily responsible for Part 1, as well as the comments and overview of the project. 
+# Yue led on Part 2, 5, and 6. Huang managed Parts 3 and 4 and model optimization. Team discussions  
+# and peer code reviews were conducted to ensure progress and accuracy. The contribution percentages 
+# were as follows: Linfan Shi 30%, Yue Yu 30%, and Xinyue Huang 40%.
 
 # Overview: This project sets up a basic neural network for classification. The network
 # contains layers of nodes, each fully interconnected with every consecutive layer. 
@@ -215,6 +213,7 @@ predict <- train(nn,inp_train,k_train,eta=.01,mb=10,nstep=10000)
 # which class is classified as
 index <- apply(inp_test,1,function(x) which.max(forward(nn=predict,x)$h[[4]]))
 difference_rate <- sum(index != k_test)/nrow(inp_test) # misclassification rate
+cat("The misclassification rate in test set is", difference_rate, ", preserved by using set.seed(13)")
 
 
 # loss decreased in test set
