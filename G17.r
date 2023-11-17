@@ -184,3 +184,59 @@ train <- function(nn,inp,k,eta=.01,mb=10,nstep=10000){
 
 
 
+# Part 5
+# In this part, we use the functions defined above to train a 4-8-7-3 network for 
+# classifying irises species based on four characteristics from the 'iris' dataset.
+# The dataset is divided into training and test data; the test data consist of
+# every 5th row starting from the 5th row. The remainder is used for training.
+
+d <- c(4,8,7,3) # Define the structure of the neural network
+nn <- netup(d) # Initialize neural network
+data(iris) # load data
+indices <- seq(from = 5, to = nrow(iris), by = 5) # indices for test data
+k <- as.numeric(as.factor(iris$Species)) # Convert species names into numeric factors.
+
+# Divide variables and labels into training set and test set
+k_train <- k[-indices]
+k_test <- k[indices]
+inp_train <- as.matrix(iris[-indices, 1:4])
+inp_test <- as.matrix(iris[indices, 1:4])
+
+# Train the neural network using the training data.
+predict <- train(nn,inp_train,k_train,eta=.01,mb=10,nstep=10000)
+
+
+
+# Part 6
+# In this part, the test data are used to make predictions using the model obtained from
+# Part 5. The misclassification rate and decrease of loss is then calculated to evaluate
+# the neural network's performance. 
+
+# which class is classified as
+index <- apply(inp_test,1,function(x) which.max(forward(nn=predict,x)$h[[4]]))
+difference_rate <- sum(index != k_test)/nrow(inp_test) # misclassification rate
+cat("The misclassification rate in test set is", difference_rate, ", preserved by using set.seed(13)")
+
+
+# loss decreased in test set
+pa_test <- apply(inp_test,1,function(x) exp(forward(nn=predict,x)$h[[4]])/sum(exp(forward(nn=predict,x)$h[[4]])))
+# loss in test set after training
+la_test <- -sum(pa_test[cbind(k_test,1:length(k_test))])/length(k_test) 
+pb_test <- apply(inp_test,1,function(x) exp(forward(nn=nn,x)$h[[4]])/sum(exp(forward(nn=nn,x)$h[[4]])))
+# loss in test set before training
+lb_test <- -sum(pb_test[cbind(k_test,1:length(k_test))])/length(k_test) 
+diff_test <- la_test - lb_test # loss decreasing in test set after training
+
+# loss decreased in train set        
+pa_train <- apply(inp_train,1,function(x) exp(forward(nn=predict,x)$h[[4]])/sum(exp(forward(nn=predict,x)$h[[4]])))
+# loss in train set after training
+la_train <- -sum(pa_train[cbind(k_train,1:length(k_train))])/length(k_train)
+pb_train <- apply(inp_train,1,function(x) exp(forward(nn=nn,x)$h[[4]])/sum(exp(forward(nn=nn,x)$h[[4]])))
+# loss in test set before training                  
+lb_train <- -sum(pb_train[cbind(k_train,1:length(k_train))])/length(k_train)
+diff_train <- la_train - lb_train # loss decreasing in train set after training
+
+# From the result, it can be seen that classification precision in test set is high,
+# indicating high generalization performance of the model constructed. Also, the dramatic
+# decrease in loss function also shows satisfied performance of model.
+                  
