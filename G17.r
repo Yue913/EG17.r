@@ -190,6 +190,7 @@ train <- function(nn,inp,k,eta=.01,mb=10,nstep=10000){
 # The dataset is divided into training and test data; the test data consist of
 # every 5th row starting from the 5th row. The remainder is used for training.
 
+set.seed(13)
 d <- c(4,8,7,3) # Define the structure of the neural network
 nn <- netup(d) # Initialize neural network
 data(iris) # load data
