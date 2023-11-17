@@ -5,6 +5,8 @@
 # and peer code reviews were conducted to ensure progress and accuracy. The contribution percentages 
 # were as follows: Linfan Shi 30%, Yue Yu 30%, and Xinyue Huang 40%.
 
+
+
 # Overview: This project sets up a basic neural network for classification. The network
 # contains layers of nodes, each fully interconnected with every consecutive layer. 
 # The main mechanism of neural network consist of two parts: forward prediction 
@@ -65,34 +67,6 @@ netup <- function(d){
 
 
 
-# Part 2
-# In this part, the function forward() computes the remaining node values and 
-# returns a new 'nn' containing both parameters and updated node values. The 
-# function updates for one data point at a time.
-# Input
-# nn: A network list of specified structure
-# inp: A vector of input values to be classified. 
-# Output
-# nn: The updated network list.
-
-forward <- function(nn,inp){
-
-  # load parameters and structures
-  h <- nn$h
-  W <- nn$W
-  b <- nn$b
-  
-  h[[1]] <- inp
-  for (i in 1:(length(h)-1)){
-    # The node values at the next layer are calculated using ReLU(g) = max(0,g), 
-    # where g is calculated as the product of weights matrix and the node values  
-    # of the current layer, plus the bias.
-    g <- as.vector(W[[i]]%*%h[[i]])+b[[i]]
-    h[[i+1]]  <- g*(g>0)
-  }
-  nn <- list(h=h,W=W,b=b)
-  return(nn) 
-}
 
 
 
